@@ -34,34 +34,6 @@ class MayoMath {
         }
     }
 
-    class PriorityStack<T> where T : Comparable<T> {
-        private val stack: Stack<T> = Stack()
-        private val tempStack: Stack<T> = Stack()
-
-        fun push(t: T) {
-            while (stack.isNotEmpty() && t < stack.peek()) {
-                tempStack.push(stack.pop())
-            }
-
-            stack.push(t)
-
-            while(tempStack.isNotEmpty()) {
-                stack.push(tempStack.pop())
-            }
-        }
-
-        fun pop(): T {
-            return stack.pop()
-        }
-
-        fun peek(): T {
-            return stack.peek()
-        }
-
-        fun isEmpty(): Boolean = this.stack.isEmpty()
-        fun isNotEmpty(): Boolean = !this.isEmpty()
-    }
-
     companion object {
         fun reduce(string: String): Double = evaluatePostfix(toPostfix(preprocess(string)))
 
@@ -97,9 +69,7 @@ class MayoMath {
                     }
                     operators.pop()
                 } else {
-                    while(operators.isNotEmpty()  && operators.peek() != Operator.PSt && operators.peek() <= Operator.fromChar(
-                            c
-                        )
+                    while(operators.isNotEmpty()  && operators.peek() != Operator.PSt && operators.peek() <= Operator.fromChar(c)
                     ) {
                         postfix.append(' ')
                         postfix.append(operators.pop())
