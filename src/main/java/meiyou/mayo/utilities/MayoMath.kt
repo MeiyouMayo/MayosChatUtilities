@@ -1,13 +1,13 @@
 package meiyou.mayo.utilities
 
 import java.util.*
+import kotlin.math.pow
 
 class MayoMath {
 
-
-
     enum class Operator(val op: Char, val operation: (Double, Double) -> Double) : Comparable<Operator> {
         PSt ('(', {_:  Double, _:  Double -> throw IllegalStateException("Tried to use '(' as operator")}), //
+        Pow ('^', {v1: Double, v2: Double -> v1.pow(v2) }),
         Div ('/', {v1: Double, v2: Double -> v1 / v2}),
         Mul ('*', {v1: Double, v2: Double -> v1 * v2}),
         Add ('+', {v1: Double, v2: Double -> v1 + v2}),
@@ -27,6 +27,7 @@ class MayoMath {
                     '-' -> Sub
                     '/' -> Div
                     '*' -> Mul
+                    '^' -> Pow
                     else -> throw IllegalArgumentException("$c is not a known operator!")
                 }
             }
